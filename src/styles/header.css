@@ -1,0 +1,57 @@
+body {
+  padding: 10px;
+}
+.hero {
+  display: flex;
+  flex-direction: column;
+}
+
+.heroContainer {
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.heroBanner {
+  position: relative;
+  width: 200px;
+  height: 300px;
+  margin-top: 30px;
+  border-radius: 3px;
+  object-fit: contain;
+}
+.heroP {
+  color: azure;
+  font-size: 30px;
+}
+.heroStatement {
+  color: azure;
+  font-size: 30px;
+}
+.text-gradient {
+  background: linear-gradient(to right, #4d045d, #8b1285);
+  background-clip: text;
+  -webkit-background-clip: text; /* For Safari */
+  color: transparent;
+}
+.search {
+  display: flex;
+  border: 1.4px solid #4d045d;
+  border-radius: 3px;
+  margin: 30px;
+
+  background-color: #895d9e;
+}
+.searchBar {
+  width: 98%;
+  border: none;
+  background-color: #895d9e;
+  padding: 8px;
+  font-size: 20px;
+  border-radius: 3px;
+}
+.searchBar::placeholder {
+  color: aliceblue;
+}

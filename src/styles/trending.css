@@ -1,0 +1,35 @@
+.trendingList {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.text-gradient {
+  background: linear-gradient(to right, #4d045d, #8b1285);
+  background-clip: text;
+  -webkit-background-clip: text; /* For Safari */
+  color: transparent;
+}
+
+.trendingId {
+  font-size: 120px;
+  position: relative;
+  left: 20px;
+  color: blueviolet;
+}
+.trendingImage {
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+}
+.trendingLi {
+  display: flex;
+  flex-direction: row;
+  margin: 10px;
+}
+.trendingHeader {
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.2rem;
+  font-size: 30px;
+  color: aliceblue;
+  margin-bottom: 20px;
+}
