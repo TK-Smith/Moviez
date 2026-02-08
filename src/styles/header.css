@@ -55,3 +55,8 @@ body {
 .searchBar::placeholder {
   color: aliceblue;
 }
+@media (max-width: 500px) {
+  .heroP {
+    font-size: 20px;
+  }
+}
