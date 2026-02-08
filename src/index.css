@@ -68,6 +68,22 @@ button:focus-visible {
 }
 */
 @import "tailwindcss";
+body {
+  min-height: 100vh;
+}
+#typedtext {
+  background: linear-gradient(to right, #4d045d, #8b1285);
+  background-clip: text;
+  -webkit-background-clip: text; /* For Safari */
+  color: transparent;
+  font-size: 40px;
+  transition: 1.5s all ease;
+}
+@media (max-width: 600px) {
+  #typedtext {
+    font-size: 25px;
+  }
+}
 /*
 @layer components {
   .movie-card {
