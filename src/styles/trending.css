@@ -33,3 +33,8 @@
   color: aliceblue;
   margin-bottom: 20px;
 }
+@media (max-width: 580px) {
+  .trendingId {
+    font-size: 85px;
+  }
+}
