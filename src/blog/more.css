@@ -1,0 +1,12 @@
+.back {
+  padding: 7px;
+  color: white;
+  border-radius: 50%;
+  font-size: 20px;
+  border: 3px solid rgb(90, 17, 136);
+  transition: 0.5s all ease;
+  cursor: pointer;
+}
+.back:hover {
+  transform: scale(1.05);
+}
