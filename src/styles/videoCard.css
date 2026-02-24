@@ -2,10 +2,12 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 20px;
+  row-gap: 40px;
   margin-top: 20px;
+  margin-bottom: 30px;
 }
 .text-gradient {
-  background: linear-gradient(to right, #4d045d, #8b1285);
+  background: linear-gradient(to right, #073740, #1d8698);
   background-clip: text;
   -webkit-background-clip: text; /* For Safari */
   color: transparent;
@@ -14,15 +16,25 @@
   display: flex;
   flex-direction: column;
   gap: 15px;
-  background-color: oklch(27.8% 0.033 256.848);
-  padding: 20px;
+  background-color: oklch(0% 0 0);
+  padding: 15px;
+  width: 230px;
+  height: 400px;
   border-radius: 1rem;
   box-shadow: inset 0 2px 4px 0 rgb(0 0 0 / 0.05);
-  margin-bottom: 30px;
+  transition: 0.3s all ease;
+}
+.movieImage {
+  width: 200px;
+  height: 320px;
+}
+
+.movie-card:hover {
+  transform: scale(1.01);
 }
 .movie-card img {
   border: 0.5rem;
-  height: 400px;
+  height: 320px;
   width: 100%;
 }
 .rating img {
@@ -41,3 +53,4 @@
 .vote {
   margin-left: 10px;
 }
+/* 239 x 400 = 200 x 350 */
