@@ -3,12 +3,16 @@ import ComedyCard from "./components/ComedyCard";
 import HorrorCard from "./components/HorrorCard";
 import AdventureCard from "./components/AdventureCard";
 import ActionCard from "./components/ActionCard";
+import ThrillerCard from "./components/ThrillerCard";
+import AnimationCard from "./components/AnimationCard";
+import ScifiCard from "./components/Sci-fi";
 import VideoCard from "./components/VideoCard";
 import Header from "./components/Header";
 import Trending from "./components/Trending";
 import { useDebounce } from "react-use";
 import { useState, useEffect } from "react";
 import { getTrendingMovies, updateSearchCount } from "./appwrite";
+import { Link } from "react-router-dom";
 
 const API_BASE_URL = "https://api.themoviedb.org/3";
 
@@ -26,9 +30,13 @@ const Home = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [movieList, setMovieList] = useState([]);
+  const [scrollerMovieList, setScrollerMovieList] = useState([]);
   const [romanceMovies, setRomanceMovies] = useState([]);
   const [comedyMovies, setComedyMovies] = useState([]);
   const [horrorMovies, setHorrorMovies] = useState([]);
+  const [thrillerMovies, setThrillerMovies] = useState([]);
+  const [animationMovies, setAnimationMovies] = useState([]);
+  const [scifiMovies, setScifiMovies] = useState([]);
   const [adventureMovies, setAdventureMovies] = useState([]);
   const [actionMovies, setActionMovies] = useState([]);
   const [trendingMovies, setTrendingMovies] = useState([]);
@@ -44,6 +52,7 @@ const Home = () => {
       const endpoint = query
         ? `${API_BASE_URL}/search/movie?query=${encodeURI(query)}`
         : `${API_BASE_URL}/discover/movie?sort_by=popularity.desc`;
+
       const response = await fetch(endpoint, API_OPTIONS);
       if (!response.ok) {
         throw new Error("Failed to fetch movies");
@@ -59,6 +68,54 @@ const Home = () => {
       if (query && data.results.length > 0) {
         await updateSearchCount(query, data.results[0]);
       }
+    } catch (err) {
+      console.error(`Error fetching movies`);
+      setErrorMessage(err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  const fetchScrollerMovies = async () => {
+    setIsLoading(true);
+    setErrorMessage("");
+    try {
+      const endpoint = `${API_BASE_URL}/discover/movie?sort_by=popularity.desc`;
+
+      const response = await fetch(endpoint, API_OPTIONS);
+      if (!response.ok) {
+        throw new Error("Failed to fetch movies");
+      }
+      const data = await response.json();
+      if (data.response === "False") {
+        setErrorMessage(data.Error || "Failed to fetch movies");
+        setScrollerMovieList([]);
+        return;
+      }
+      setScrollerMovieList(data.results || []);
+    } catch (err) {
+      console.error(`Error fetching movies`);
+      setErrorMessage(err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  const fetchAnimationMovies = async () => {
+    setIsLoading(true);
+    setErrorMessage("");
+    try {
+      const endpoint = `${API_BASE_URL}/discover/movie?with_genres=16&sort_by=popularity.desc`;
+      const response = await fetch(endpoint, API_OPTIONS);
+      if (!response.ok) {
+        throw new Error("Failed to fetch movies");
+      }
+      const data = await response.json();
+
+      if (data.response === "False") {
+        setErrorMessage(data.Error || "Failed to fetch movies");
+        setAnimationMovies([]);
+        return;
+      }
+      setAnimationMovies(data.results || []);
     } catch (err) {
       console.error(`Error fetching movies`);
       setErrorMessage(err);
@@ -113,6 +170,30 @@ const Home = () => {
       setIsLoading(false);
     }
   };
+  const fetchScifiMovies = async () => {
+    setIsLoading(true);
+    setErrorMessage("");
+    try {
+      const endpoint = `${API_BASE_URL}/discover/movie?with_genres=878&sort_by=popularity.desc`;
+      const response = await fetch(endpoint, API_OPTIONS);
+      if (!response.ok) {
+        throw new Error("Failed to fetch movies");
+      }
+      const data = await response.json();
+
+      if (data.response === "False") {
+        setErrorMessage(data.Error || "Failed to fetch movies");
+        setScifiMovies([]);
+        return;
+      }
+      setScifiMovies(data.results || []);
+    } catch (err) {
+      console.error(`Error fetching movies`);
+      setErrorMessage(err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
   const fetchHorrorMovies = async () => {
     setIsLoading(true);
     setErrorMessage("");
@@ -130,6 +211,30 @@ const Home = () => {
         return;
       }
       setHorrorMovies(data.results || []);
+    } catch (err) {
+      console.error(`Error fetching movies`);
+      setErrorMessage(err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  const fetchThrillerMovies = async () => {
+    setIsLoading(true);
+    setErrorMessage("");
+    try {
+      const endpoint = `${API_BASE_URL}/discover/movie?with_genres=53&sort_by=popularity.desc`;
+      const response = await fetch(endpoint, API_OPTIONS);
+      if (!response.ok) {
+        throw new Error("Failed to fetch movies");
+      }
+      const data = await response.json();
+
+      if (data.response === "False") {
+        setErrorMessage(data.Error || "Failed to fetch movies");
+        setThrillerMovies([]);
+        return;
+      }
+      setThrillerMovies(data.results || []);
     } catch (err) {
       console.error(`Error fetching movies`);
       setErrorMessage(err);
@@ -200,21 +305,45 @@ const Home = () => {
   }, [debouncedSearchTerm]);
 
   useEffect(() => {
+    fetchScrollerMovies();
     loadTrendingMovies();
     fetchRomanceMovies();
     fetchComedyMovies();
     fetchAdventureMovies();
     fetchActionMovies();
     fetchHorrorMovies();
+    fetchThrillerMovies();
+    fetchScifiMovies();
+    fetchAnimationMovies();
   }, []);
+
   return (
     <main style={{ flexGrow: 1 }}>
-      <div className="wrapper">
-        <Header searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-
+      <div className="wrapper text-balance">
+        <Header
+          movieList={scrollerMovieList}
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
+        />
         {trendingMovies.length > 0 && (
           <Trending trendingMovies={trendingMovies} />
         )}
+
+        <ActionCard
+          actionMovies={actionMovies}
+          errorMessage={errorMessage}
+          isLoading={isLoading}
+        />
+        <AdventureCard
+          adventureMovies={adventureMovies}
+          errorMessage={errorMessage}
+          isLoading={isLoading}
+        />
+        <AnimationCard
+          animationMovies={animationMovies}
+          errorMessage={errorMessage}
+          isLoading={isLoading}
+        />
         <ComedyCard
           comedyMovies={comedyMovies}
           errorMessage={errorMessage}
@@ -225,26 +354,63 @@ const Home = () => {
           errorMessage={errorMessage}
           isLoading={isLoading}
         />
-        <AdventureCard
-          adventureMovies={adventureMovies}
-          errorMessage={errorMessage}
-          isLoading={isLoading}
-        />
-        <ActionCard
-          actionMovies={actionMovies}
-          errorMessage={errorMessage}
-          isLoading={isLoading}
-        />
         <RomanceCard
           romanceMovies={romanceMovies}
           errorMessage={errorMessage}
           isLoading={isLoading}
         />
+        <ScifiCard
+          scifiMovies={scifiMovies}
+          errorMessage={errorMessage}
+          isLoading={isLoading}
+        />
+        <ThrillerCard
+          thrillerMovies={thrillerMovies}
+          errorMessage={errorMessage}
+          isLoading={isLoading}
+        />
+        <div className="genresM">
+          <Link to="genres">
+            <button className="more-genres">More Genres</button>
+          </Link>
+        </div>
         <VideoCard
           isLoading={isLoading}
           movieList={movieList}
           errorMessage={errorMessage}
         />
+      </div>
+      <div className="pages">
+        <Link to="/">
+          <button>1</button>
+        </Link>
+        <Link to="/pages/2">
+          <button>2</button>
+        </Link>
+        <Link to="/pages/3">
+          <button>3</button>
+        </Link>
+        <Link to="/pages/4">
+          <button>4</button>
+        </Link>
+        <Link to="/pages/5">
+          <button>5</button>
+        </Link>
+        <Link to="/pages/6">
+          <button>6</button>
+        </Link>
+        <Link to="/pages/7">
+          <button>7</button>
+        </Link>
+        <Link to="/pages/8">
+          <button>8</button>
+        </Link>
+        <Link to="/pages/9">
+          <button>9</button>
+        </Link>
+        <Link to="/pages/10">
+          <button>10</button>
+        </Link>
       </div>
     </main>
   );
