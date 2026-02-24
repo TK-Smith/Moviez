@@ -3,8 +3,8 @@ import poster from "../assets/poster.png";
 import "../styles/romanceCard.css";
 import { Link } from "react-router-dom";
 
-const WesternCard = ({ isLoading, errorMessage, westernMovies }) => {
-  var movieName = "Western";
+const WarCard = ({ isLoading, errorMessage, warMovies }) => {
+  var movieName = "War";
   return (
     <section>
       <h1 className="text-amber-50 checkers">
@@ -17,7 +17,7 @@ const WesternCard = ({ isLoading, errorMessage, westernMovies }) => {
           <p className="text-red-500">{errorMessage}</p>
         ) : (
           <ul className="romance-movies">
-            {westernMovies.slice(0, 4).map((movie) => (
+            {warMovies.slice(0, 4).map((movie) => (
               <div className="romance-card">
                 <a
                   href={`https://www.youtube.com/results?search_query=${movie.title}`}
@@ -38,7 +38,7 @@ const WesternCard = ({ isLoading, errorMessage, westernMovies }) => {
               </div>
             ))}
             <div className="romance-card more">
-              <Link to="/more/37" className="cover">
+              <Link to="/more/10752" className="cover">
                 <span className="text-gradient">More {movieName} &#10132;</span>
               </Link>
             </div>
@@ -49,4 +49,4 @@ const WesternCard = ({ isLoading, errorMessage, westernMovies }) => {
   );
 };
 
-export default WesternCard;
+export default WarCard;
