@@ -37,6 +37,7 @@ function display() {
   document.getElementById("root").style.display = "block";
   document.getElementById("typedtext").style.display = "none";
   document.body.style.display = "block";
+  document.body.style.marginTop = "56px";
 }
 setTimeout(typewriter, 1000);
 setTimeout(display, 3000);
