@@ -1,9 +1,74 @@
 body {
   padding: 10px;
 }
+#myCarousel {
+  display: fixed;
+  left: 0;
+  right: 0;
+}
+.head {
+  background-color: black;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  padding: 10px;
+  height: 65px;
+  z-index: 100;
+  display: flex;
+  color: white;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.left {
+  display: flex;
+  align-items: center;
+}
+.left h2 {
+  font-size: 30px;
+  line-height: 1.6;
+  letter-spacing: 7px;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+.input-cnt {
+  display: flex;
+  width: 75%;
+}
+.input-cnt > i {
+  min-width: 40px;
+  padding: 10px;
+  text-align: center;
+  background: lightgrey;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+}
+.input-cnt > input {
+  outline: none;
+  border: none;
+  padding: 10px;
+  border: 1px solid lightgrey;
+  border-top-right-radius: 20px;
+  border-top-left-radius: 0px;
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 0px;
+  width: 60%;
+  transition: width 0.4s;
+}
+.input-cnt:hover > input {
+  border: 2px solid #0076ff;
+  width: 100%;
+}
+.input-cnt:hover > i {
+  background: #0076ff;
+  color: white;
+}
 .hero {
   display: flex;
   flex-direction: column;
+}
+.releaseDate {
+  display: none;
 }
 
 .heroContainer {
@@ -30,18 +95,11 @@ body {
   color: azure;
   font-size: 30px;
 }
-.text-gradient {
-  background: linear-gradient(to right, #4d045d, #8b1285);
-  background-clip: text;
-  -webkit-background-clip: text; /* For Safari */
-  color: transparent;
-}
 .search {
   display: flex;
   border: 1.4px solid #4d045d;
-  border-radius: 3px;
+  border-radius: 75px;
   margin: 30px;
-
   background-color: #895d9e;
 }
 .searchBar {
@@ -50,7 +108,7 @@ body {
   background-color: #895d9e;
   padding: 8px;
   font-size: 20px;
-  border-radius: 3px;
+  border-radius: 50px;
 }
 .searchBar::placeholder {
   color: aliceblue;
@@ -58,5 +116,15 @@ body {
 @media (max-width: 500px) {
   .heroP {
     font-size: 20px;
+  }
+  .left h2 {
+    font-size: 20px;
+    letter-spacing: 2px;
+  }
+  .overview {
+    display: none;
+  }
+  .releaseDate {
+    display: block;
   }
 }
