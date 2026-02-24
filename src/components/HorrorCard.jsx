@@ -7,7 +7,7 @@ const HorrorCard = ({ isLoading, errorMessage, horrorMovies }) => {
   var movieName = "Horror";
   return (
     <section>
-      <h1 className="text-amber-50" style={{ fontSize: "30px" }}>
+      <h1 className="text-amber-50 checkers">
         {movieName} <span className="text-gradient">Movies</span>
       </h1>
       <div>
