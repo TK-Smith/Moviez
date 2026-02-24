@@ -3,12 +3,6 @@
   flex-direction: row;
   flex-wrap: wrap;
 }
-.text-gradient {
-  background: linear-gradient(to right, #4d045d, #8b1285);
-  background-clip: text;
-  -webkit-background-clip: text; /* For Safari */
-  color: transparent;
-}
 
 .trendingId {
   font-size: 120px;
@@ -36,5 +30,9 @@
 @media (max-width: 580px) {
   .trendingId {
     font-size: 85px;
+  }
+  .trendingHeader {
+    margin-top: 8px;
+    font-size: 23px;
   }
 }
