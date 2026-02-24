@@ -22,7 +22,7 @@ const VideoCard = ({ isLoading, movieList, errorMessage }) => {
                   href={`https://www.youtube.com/results?search_query=${movie.title}`}
                   target="_blank"
                 >
-                  <div className="movieImg">
+                  <div className="movieImage">
                     <img
                       title={movie.title}
                       src={
@@ -33,11 +33,11 @@ const VideoCard = ({ isLoading, movieList, errorMessage }) => {
                       alt={movie.title}
                     />
                   </div>
-                  <div>
+                  <div className="w-48 truncate">
                     <h3
                       title={movie.title}
-                      className="font-stretch-condensed text-gradient"
-                      style={{ fontSize: "20px" }}
+                      className="font-stretch-condensed truncate text-gradient"
+                      style={{ fontSize: "16px" }}
                     >
                       {movie.title}
                     </h3>
@@ -50,8 +50,8 @@ const VideoCard = ({ isLoading, movieList, errorMessage }) => {
                         />
                       </div>
                       <p
-                        style={{ display: "inline-block" }}
-                        className="text-white vote"
+                        style={{ display: "inline-block", color: "white" }}
+                        className="text-white vote text-light"
                       >
                         {movie.vote_average
                           ? movie.vote_average.toFixed(1)
